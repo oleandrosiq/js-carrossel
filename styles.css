@@ -83,7 +83,7 @@ section main.images {
   scroll-behavior: smooth;
 }
 
-div {
+div.buttons {
   width: 100%;
   max-width: 25rem;
   margin-top: 2rem;
@@ -91,6 +91,26 @@ div {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+div.dots ul {
+  list-style: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+div.dots li {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--gray);
+}
+
+div.dots li.active {
+  background: var(--blue);
 }
 
 button {

@@ -32,11 +32,43 @@ const App = {
     imageElement.src = image.url;
     imageElement.alt = image.title;
 
-    App.appendElementDom(imageElement);
+    App.appendElementDom(imageElement, 'images');
+    App.createDots(index);
   },
 
-  appendElementDom(element) {
-    const imagesContainer = document.getElementById('images');
+  createDots(index, indexDotUpdate) {
+    const dotElement = document.createElement('li');
+
+    dotElement.id = index;
+    if (index === 0 && !indexDotUpdate) {
+      dotElement.classList.add('active');
+    }
+
+    if (indexDotUpdate && indexDotUpdate === index) {
+      dotElement.classList.add('active');
+    }
+
+    App.appendElementDom(dotElement, 'dots');
+  },
+
+  updateDots(indexDotUpdate) {
+    const currentDot = document.querySelector('.active');
+    currentDot.classList.remove('active');
+
+    const dots = document.getElementById('dots');
+
+    const newDot = document.getElementById(indexDotUpdate);
+    newDot.classList.add('active');
+
+    dots.innerHTML = '';
+
+    App.images.forEach((_, index) => {
+      App.createDots(index, indexDotUpdate);
+    });
+  },
+
+  appendElementDom(element, parent) {
+    const imagesContainer = document.getElementById(parent);
     imagesContainer.appendChild(element);
   },
 
@@ -53,10 +85,14 @@ const App = {
 
     if (nextImage) {
       nextImage.scrollIntoView();
+
+      App.updateDots(App.currentImage + 1);
       App.currentImage++;
     } else {
       const imageInit = document.getElementById(0);
       imageInit.scrollIntoView();
+
+      App.updateDots(0);
       App.currentImage = 0;
     }
   },
@@ -66,10 +102,14 @@ const App = {
 
     if (prevImage) {
       prevImage.scrollIntoView();
+      App.updateDots(App.currentImage - 1);
+
       App.currentImage--;
     } else {
       const lastImage = document.getElementById(App.totalImages - 1);
       lastImage.scrollIntoView();
+
+      App.updateDots(App.totalImages - 1);
       App.currentImage = App.totalImages - 1;
     }
   },
