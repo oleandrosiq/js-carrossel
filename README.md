@@ -51,7 +51,7 @@ The following tools were used in this project:
 
 ```bash
 # Clone this project
-$ git clone https://github.com/{{YOUR_GITHUB_USERNAME}}/carrossel
+$ git clone https://github.com/oleandrosiq/carrossel
 
 # Access
 $ cd carrossel
