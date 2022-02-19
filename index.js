@@ -37,18 +37,19 @@ const App = {
   },
 
   createDots(index, indexDotUpdate) {
-    const dotElement = document.createElement('li');
+    const dot = document.createElement('li');
 
-    dotElement.id = index;
+    dot.id = index;
+
     if (index === 0 && !indexDotUpdate) {
-      dotElement.classList.add('active');
+      dot.classList.add('active');
     }
 
     if (indexDotUpdate && indexDotUpdate === index) {
-      dotElement.classList.add('active');
+      dot.classList.add('active');
     }
 
-    App.appendElementDom(dotElement, 'dots');
+    App.appendElementDom(dot, 'dots');
   },
 
   updateDots(indexDotUpdate) {
@@ -56,13 +57,9 @@ const App = {
     currentDot.classList.remove('active');
 
     const dots = document.getElementById('dots');
-
-    const newDot = document.getElementById(indexDotUpdate);
-    newDot.classList.add('active');
-
     dots.innerHTML = '';
 
-    App.images.forEach((_, index) => {
+    App.images.forEach((image, index) => {
       App.createDots(index, indexDotUpdate);
     });
   },
